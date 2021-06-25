@@ -1,0 +1,175 @@
+<div class="search-div">
+
+    <!-- <button class="margin-right:50px" mat-raised-button matSuffix  (click)="onValidate()">
+        <div class="icons8-settings"></div>Check
+    </button> -->
+    <button mat-raised-button (click)="onCreate()">
+        <mat-icon>add</mat-icon>ADD
+    </button>
+    <button mat-button matSuffix mat-icon-button (click)="exportAsXLSX()">
+        <div class="icons8-microsoft-excel"></div>
+    </button>
+    
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off"
+            (keyup)="applyFilter($event.target.value)">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <!-- <button mat-button matSuffix mat-icon-button (click)="loadData()">
+        <mat-icon style="color:green">autorenew</mat-icon>
+    </button> -->
+
+    <span class="fill-remaining-space"></span>
+</div>
+
+
+
+<div class="mat-elevation-z8">
+
+
+    <mat-table  [dataSource]="dataArray" matSort>
+        <ng-container matColumnDef="UPDATE">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)">
+                    <mat-icon>launch</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(row.id)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="STOREDATE">
+            <mat-header-cell *matHeaderCellDef>Store Date</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.storeDate | date: 'dd-MMM-yyyy hh:mm'}}
+            </mat-cell>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="REGION">
+            <mat-header-cell *matHeaderCellDef>REGION</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.region }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CENTRAL">
+            <mat-header-cell *matHeaderCellDef>CENTRAL</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.central }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CODE">
+            <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.code }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="PASSIVEID">
+            <mat-header-cell *matHeaderCellDef>PASSIVEID</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.passiveId }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FROMPATH">
+            <mat-header-cell *matHeaderCellDef>FROMPATH</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.fromPath }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="TOPATH">
+            <mat-header-cell *matHeaderCellDef>TOPATH</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.toPath }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FROMROOM">
+            <mat-header-cell *matHeaderCellDef>FROMROOM</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.fromRoom }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TOROOM">
+            <mat-header-cell *matHeaderCellDef>TOROOM</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.toRoom }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CABLECAPACITY">
+            <mat-header-cell *matHeaderCellDef>CABLECAPACITY</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.cableCapacity }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CABLELENGTH">
+            <mat-header-cell *matHeaderCellDef>CABLELENGTH</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.cableLength }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="BRAHCHNUMBER">
+            <mat-header-cell *matHeaderCellDef>BRAHCHNUMBER</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.brahchNumber }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TUBECOLOR">
+            <mat-header-cell *matHeaderCellDef>TUBECOLOR</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.tubeColor }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="FREEBRANCH">
+            <mat-header-cell *matHeaderCellDef>FREEBRANCH</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.freeBranch }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FIBERJUNCTIONNUMBER">
+            <mat-header-cell *matHeaderCellDef>FIBERJUNCTIONNUMBER</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{ element.fiberJunctionNumber }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Loading data...
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No data.
+            </mat-footer-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataArray!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+            [ngClass]="{'hide':!(dataArray!=null && dataArray.data.length==0)}"></mat-footer-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15 , 20 , 50 , 100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+
+</div>

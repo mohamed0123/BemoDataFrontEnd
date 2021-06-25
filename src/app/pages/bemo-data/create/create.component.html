@@ -1,0 +1,75 @@
+<mat-toolbar>
+    <span>{{ service.form.controls["id"].value ? "Edit" : "Create" }}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+    <mat-grid-list cols="3" rowHeight="420px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <div style="height: 50px"></div>
+
+                <mat-form-field>
+                    <mat-select formControlName="central" placeholder="Please Select Central">
+                        <!-- <mat-option>None</mat-option> -->
+                        <ng-container *ngFor="let central of allCentral">
+                            <mat-option value="{{ central }}">{{ central }}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select formControlName="tubeColor" placeholder="Please Select Type">
+                        <!-- <mat-option>None</mat-option> -->
+                        <ng-container *ngFor="let tubeColor of allTubeColor">
+                            <mat-option value="{{ tubeColor }}">{{ tubeColor }}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="button-row">
+                    <!-- [disabled]="service.form.invalid" -->
+                    <button mat-raised-button color="primary" type="submit">Save</button>
+                    <button id="buttonReset" mat-raised-button color="warn" type="reset">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="controles-container">
+                <input type="hidden" formControlName="id" />
+
+                <mat-form-field><input formControlName="region" matInput placeholder="REGION" /></mat-form-field>
+                <mat-form-field><input formControlName="code" matInput placeholder="CODE" /></mat-form-field>
+                
+                <mat-form-field><input formControlName="fromPath" matInput placeholder="FROMPATH" /></mat-form-field>
+                <mat-form-field><input formControlName="toPath" matInput placeholder="TOPATH" /></mat-form-field>
+                <mat-form-field><input formControlName="fromRoom" matInput placeholder="FROMROOM" /></mat-form-field>
+                <mat-form-field><input formControlName="toRoom" matInput placeholder="TOROOM" /></mat-form-field>
+                
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="controles-container">
+                
+                <mat-form-field><input formControlName="passiveId" matInput placeholder="PASSIVEID" /></mat-form-field>
+                <mat-form-field><input formControlName="cableCapacity" matInput placeholder="CABLECAPACITY" />
+                </mat-form-field>
+                <mat-form-field><input formControlName="cableLength" matInput placeholder="CABLELENGTH" />
+                </mat-form-field>
+                <mat-form-field><input formControlName="brahchNumber" matInput placeholder="BRAHCHNUMBER" />
+                </mat-form-field>
+                <mat-form-field><input formControlName="freeBranch" matInput placeholder="FREEBRANCH" />
+                </mat-form-field>
+                <mat-form-field><input formControlName="fiberJunctionNumber" matInput
+                        placeholder="FIBERJUNCTIONNUMBER" /></mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
